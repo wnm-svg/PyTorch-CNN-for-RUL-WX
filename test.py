@@ -15,3 +15,4 @@ model = CNN1(15)
 model.load_state_dict(torch.load('model/model_FD001.pth'))
 predictions = test_prediction(model, test_x)
 print(len(predictions))
+#  this is a test

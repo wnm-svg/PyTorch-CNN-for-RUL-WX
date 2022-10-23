@@ -51,6 +51,7 @@ if __name__ == "__main__":
     # max_cycle : total number of  cycles for train
     # max_cycle_t : current number of cycles for test
     # y_test : RUL for test
+    print("training begin\n")
 
     train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD001()
     X_ss, idx, Xt_ss, idx_t, nf, ns, ns_t = get_info(train_raw, test_raw)

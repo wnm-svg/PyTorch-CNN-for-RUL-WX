@@ -8,6 +8,7 @@ def test_prediction(model, test_x):
         output = model(test_x)
 
 
+
     # softmax = torch.exp(output).cpu()
     # # print(softmax[0:1])
     # prob = list(softmax.numpy())

@@ -20,7 +20,7 @@ class CNN1(Module):
         )
 
         self.linear_layers = Sequential(
-            Linear(14 * 2 * 1, 131)
+            Linear(14 * 2 * 1,1)
            
         )
 

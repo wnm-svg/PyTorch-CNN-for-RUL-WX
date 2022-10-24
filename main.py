@@ -28,7 +28,7 @@ def train(n_epochs, model, train_x, train_y, test_x, max_cycle_t, y_test):
 
         # computing the training and validation loss
         # output_train = output_train.long()
-        # y_train = y_train.long()
+        y_train = y_train.float()
         loss_train = criterion(output_train, y_train)
         loss_train.backward()
         optimizer.step()
@@ -51,13 +51,14 @@ if __name__ == "__main__":
     # max_cycle : total number of  cycles for train
     # max_cycle_t : current number of cycles for test
     # y_test : RUL for test
-    print("training begin\n")
 
-    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD001()
+    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD004()
     X_ss, idx, Xt_ss, idx_t, nf, ns, ns_t = get_info(train_raw, test_raw)
 
     # prepare training and validation dataset
     train_x, train_y = train_val_prepare(max_cycle, idx, X_ss, "linear", nf, ns)
+    train_y = torch.reshape(train_y,(len(train_y),1))
+    # print(train_y.shape)
     # prepare testing dataset
     test_x = test_prepare(Xt_ss, idx_t, nf, ns_t)
 
@@ -66,19 +67,23 @@ if __name__ == "__main__":
     # defining the optimizer
     optimizer = optim.Adam(model.parameters(), lr=0.01)
     # defining the loss function
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.MSELoss()
 
     # train the model
     rmse_history = train(N_EPOCH, model, train_x, train_y, test_x, max_cycle_t, y_test)
 
     # prediction on testing dataset
     predictions = test_prediction(model, test_x)
+    predictions = predictions.numpy()
+    predictions = predictions.reshape(len(predictions))
+
     # evaluate the prediction accuracy
     result, rmse, score = evaluation.scoring(predictions, max_cycle_t, y_test)
+
     evaluation.visualization(y_test, result, rmse)
     print(min(rmse_history))
-    torch.save(model.state_dict(), './model/model_FD001.pth')
-    print('model_FD001.pth saved')
+    torch.save(model.state_dict(), './model/model_FD0041.pth')
+    print('model_FD004.pth saved')
 
     # save model
     # torch.save(model, 'RUL.pth')

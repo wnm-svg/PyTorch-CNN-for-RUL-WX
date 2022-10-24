@@ -1,5 +1,5 @@
 import numpy as np
-from target_rul import target_rul
+from target import target_rul
 import torch
 from sklearn.model_selection import train_test_split
 from load_data import *

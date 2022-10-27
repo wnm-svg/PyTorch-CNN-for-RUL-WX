@@ -27,13 +27,15 @@ class CNN1(Module):
     # Defining the forward pass
     def forward(self, x):
         x = self.cnn_layers(x)
-        x = x.view(x.size(0), -1)
+        # for onnx: x.size(0) -> int(x.size(0))
+        x = x.view(int(x.size(0)), -1) 
         x = self.linear_layers(x)
         return x
 
 
 if __name__ == "__main__":
     model = CNN1(15)
-    model = model.cuda()
+    model.cuda()
     summary(model, input_size=[(1,15,15)])
+
 

@@ -1,5 +1,5 @@
 import numpy as np
-from target import target_rul
+from target_rul import target_rul
 import torch
 from sklearn.model_selection import train_test_split
 from load_data import *
@@ -98,5 +98,4 @@ if __name__ == "__main__":
     X_ss, idx, Xt_ss, idx_t, nf, ns, ns_t = get_info(train_raw, test_raw)
     train_x, train_y = train_val_prepare(max_cycle, idx, X_ss, "linear", nf, ns)
     test_x = test_prepare(Xt_ss, idx_t, nf, ns_t)
-    print(train_y.shape)
 

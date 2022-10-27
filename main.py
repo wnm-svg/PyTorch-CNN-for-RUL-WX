@@ -20,6 +20,8 @@ def train(n_epochs, model, train_x, train_y, test_x, max_cycle_t, y_test):
         # getting the training set
         x_train, y_train = Variable(train_x), Variable(train_y)
 
+
+
         # clearing the Gradients of the model parameters
         optimizer.zero_grad()
 
@@ -52,7 +54,7 @@ if __name__ == "__main__":
     # max_cycle_t : current number of cycles for test
     # y_test : RUL for test
 
-    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD004()
+    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD001()
     X_ss, idx, Xt_ss, idx_t, nf, ns, ns_t = get_info(train_raw, test_raw)
 
     # prepare training and validation dataset
@@ -62,6 +64,8 @@ if __name__ == "__main__":
     # prepare testing dataset
     test_x = test_prepare(Xt_ss, idx_t, nf, ns_t)
 
+  
+  
     # initialize the cnn model
     model = CNN1(nf)
     # defining the optimizer
@@ -82,8 +86,8 @@ if __name__ == "__main__":
 
     evaluation.visualization(y_test, result, rmse)
     print(min(rmse_history))
-    torch.save(model.state_dict(), './model/model_FD0041.pth')
-    print('model_FD004.pth saved')
+    torch.save(model.state_dict(), './model/model_FD00.pth')
+    print('model_FD001.pth saved')
 
-    # save model
-    # torch.save(model, 'RUL.pth')
+    # # # save model
+    # # # torch.save(model, 'RUL.pth')

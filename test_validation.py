@@ -21,9 +21,14 @@ def test_validation(Xt_ss, max_cycle_t, nf):
     return test_validation
 
 if __name__ == "__main__":
-    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD001()
+    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD003()
     X_ss, idx, Xt_ss, idx_t, nf, ns, ns_t = get_info(train_raw, test_raw)
     # include last example of every engine , 100 examples totally
     validation = test_validation(Xt_ss, max_cycle_t, nf)
+    validation = validation.detach().numpy()
     print(len(validation))
+    # np.save("./validation/4_validation_x.npy", validation)
+    # np.save("./validation/4_validation_y.npy", y_test)
+
+    
 

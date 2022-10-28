@@ -20,4 +20,4 @@ torch.onnx.export(
                 export_params=True
                 )
 
-print("model_FD004.onnx saved")
+print("model_FD001.onnx saved")

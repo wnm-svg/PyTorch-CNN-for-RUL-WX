@@ -2,14 +2,14 @@
 
 from torch import nn, optim
 from torch.autograd import Variable
-
+import time 
 import evaluation
 from dataset_prepare import *
 from load_data import *
 from model import *
 from test_prediction import *
 
-N_EPOCH = 250
+N_EPOCH = 400
 
 
 def train(n_epochs, model, train_x, train_y, test_x, max_cycle_t, y_test):
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     # max_cycle_t : current number of cycles for test
     # y_test : RUL for test
 
-    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD001()
+    train_raw, test_raw, max_cycle, max_cycle_t, y_test = load_data_FD004()
     X_ss, idx, Xt_ss, idx_t, nf, ns, ns_t = get_info(train_raw, test_raw)
 
     # prepare training and validation dataset
@@ -86,8 +86,9 @@ if __name__ == "__main__":
 
     evaluation.visualization(y_test, result, rmse)
     print(min(rmse_history))
-    torch.save(model.state_dict(), './model/model_FD00.pth')
-    print('model_FD001.pth saved')
+    real_time = time.asctime()
+    torch.save(model.state_dict(), './model/model_FD004_{}.pth'.format(real_time))
+    print('model_FD004.pth saved')
 
     # # # save model
     # # # torch.save(model, 'RUL.pth')

@@ -4,7 +4,7 @@ import time
 
 
 def scoring(predictions, max_cycle_t, y_test):
-    n_test = 100
+    n_test = 248
     result = []
     ix = 1
     k = 0
@@ -35,7 +35,7 @@ def scoring(predictions, max_cycle_t, y_test):
 def visualization(y_test, result, root_mse):
     real_time = time.asctime()
     plt.figure(figsize=(25, 10))  # plotting
-    plt.axvline(x=100, c='r', linestyle='--')  # size of the training set
+    plt.axvline(x=248, c='r', linestyle='--')  # size of the training set
 
     plt.plot(y_test, label='Actual Data')  # actual plot
     plt.plot(result, label='Predicted Data')  # predicted plot
@@ -43,5 +43,5 @@ def visualization(y_test, result, root_mse):
     plt.legend()
     plt.xlabel("Samples")
     plt.ylabel("Remaining Useful Life")
-    plt.savefig('./_trials/FD001-RMSE = {}-{}.png'.format(root_mse,real_time))
+    plt.savefig('./_trials/FD004-RMSE = {}-{}.png'.format(root_mse,real_time))
     plt.show()
